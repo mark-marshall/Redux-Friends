@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './App.css';
 import Friends from './Components/Friends';
@@ -7,20 +8,6 @@ import EditFriend from './Components/EditFriend';
 
 class App extends Component {
   state = {
-    friends: [
-      {
-        id: 1,
-        name: 'Joe',
-        age: 24,
-        email: 'joe@lambdaschool.com',
-      },
-      {
-        id: 2,
-        name: 'Steven',
-        age: 24,
-        email: 'stven@lambdaschool.com',
-      },
-    ],
     addFriend: {
       name: '',
       age: '',
@@ -65,7 +52,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Friends friends={this.state.friends} />
+        <Friends friends={this.props.friends} />
         <AddFriend
           addFriend={this.state.addFriend}
           addFriendHandler={this.addFriendHandler}
@@ -80,4 +67,12 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state){
+  return {
+    friends: state.friends,
+    spinner: state.spinner,
+    error: state.error,
+  }
+}
+
+export default connect(mapStateToProps)(App);

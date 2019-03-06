@@ -1,8 +1,11 @@
 import * as types from './actionTypes';
 
-// 2 reducers - 1 for friends array, 1 for spinner, and 1 for error
-
-export function friends(friendsArray = [], action) {
+export function friends(friendsArray = [{
+    id: 1,
+    name: 'Joe',
+    age: 24,
+    email: 'joe@lambdaschool.com',
+  }], action) {
   switch (action.type) {
     case types.GET_FRIENDS:
       return action.payload;
