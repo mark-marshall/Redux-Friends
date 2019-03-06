@@ -24,7 +24,7 @@ export default function AddFriend({ addFriend, addFriendHandler }) {
            onChange={event => addFriendHandler(event)}
            value={addFriend.email}
         />
-        <button className="addButton" /*onClick={postFriend} FIRE THE ACTION CREATOR FROM HERE & GIVE IT VALUES */ type="submit">
+        <button className="addButton" /*onClick={postFriend}  */ type="submit">
           Add Friend
         </button>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Friends({ friends }) {
+export default function Friends({ friends, setFriendEditValue }) {
   return friends.map(friend => (
     <div key={friend.id}>
       <h1>{friend.name}</h1>
@@ -8,9 +8,9 @@ export default function Friends({ friends }) {
       <p>{friend.email}</p>
       <button
         className="editButton"
-        // onClick={event => setEditMode(event)}
+        onClick={() => setFriendEditValue(friend)}
         type="submit"
-        value={friend.id}
+        value={friend}
       >
         Edit
       </button>

@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import './App.css';
 import Friends from './Components/Friends';
 import AddFriend from './Components/AddFriend';
 import EditFriend from './Components/EditFriend';
+import {
+  getFriendsAsync,
+  addFriendAsync,
+  deleteFriendAsync,
+  updateFriendAsync,
+} from './state/actionCreators';
 
 class App extends Component {
   state = {
@@ -19,6 +26,7 @@ class App extends Component {
       email: '',
     },
     editMode: false,
+    currentFriendEditing: '',
   };
 
   addFriendHandler = event => {
@@ -45,34 +53,63 @@ class App extends Component {
         name: '',
         age: '',
         email: '',
-      }
-    })
+      },
+    });
+  };
+
+  setFriendEditValue = friend => {
+   this.setState({
+     editFriend: {
+       name: friend.name,
+       age: friend.age,
+       email: friend.email,
+     }
+   })
   }
 
   render() {
-    return (
-      <div className="App">
-        <Friends friends={this.props.friends} />
-        <AddFriend
-          addFriend={this.state.addFriend}
-          addFriendHandler={this.addFriendHandler}
-        />
-        <EditFriend
-          editFriend={this.state.editFriend}
-          editFriendHandler={this.editFriendHandler}
-          cancelEdit={this.cancelEdit}
-        />
-      </div>
-    );
+    if (this.props.spinner) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <div className="App">
+          <Friends friends={this.props.friends} setFriendEditValue={this.setFriendEditValue} />
+          <AddFriend
+            addFriend={this.state.addFriend}
+            addFriendHandler={this.addFriendHandler}
+          />
+          <EditFriend
+            editFriend={this.state.editFriend}
+            editFriendHandler={this.editFriendHandler}
+            cancelEdit={this.cancelEdit}
+          />
+        </div>
+      );
+    }
   }
 }
 
-function mapStateToProps(state){
+function mapStateToProps(state) {
   return {
     friends: state.friends,
     spinner: state.spinner,
     error: state.error,
-  }
+  };
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      getFriendsAsync,
+      addFriendAsync,
+      deleteFriendAsync,
+      updateFriendAsync,
+    },
+    dispatch,
+  );
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);

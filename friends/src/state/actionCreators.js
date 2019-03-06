@@ -105,7 +105,7 @@ export function spinnerOn() {
   };
 }
 
-export function spinnrOff() {
+export function spinnerOff() {
   return {
     type: types.SPINNER_OFF,
   };

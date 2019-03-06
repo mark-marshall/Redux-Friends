@@ -24,7 +24,7 @@ export default function EditFriend({ editFriend, editFriendHandler, cancelEdit }
          onChange={event => editFriendHandler(event)}
          value={editFriend.email}
       />
-      <button type="submit" /*</div>onClick={updateFriend} FIRE THE ACTION CREATOR FROM HERE & GIVE IT VALUES*/>
+      <button type="submit" /*</div>onClick={updateFriend} */>
         Edit Friend
       </button>
       <button type="submit" onClick={cancelEdit} className="cancelButton">
