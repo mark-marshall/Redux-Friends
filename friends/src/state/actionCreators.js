@@ -1,4 +1,59 @@
 import * as types from './actionTypes';
+import axios from 'axios';
+
+const friendsURL = 'http://localhost:5000/api/friends';
+
+export const getFriendsAsync = () => dispatch => {
+    dispatch(spinnerOn());
+    axios
+    .get(friendsURL)
+    .then(friends => {
+        dispatch(getFriends(friends.data));
+        dispatch(spinnerOff());
+    })
+    .catch(error => {
+        dispatch(throwError(error.message));
+    });
+}
+
+export const addFriendAsync = friend => dispatch => {
+    dispatch(spinnerOn());
+    axios
+    .post(friendsURL, friend)
+    .then(friends => {
+        dispatch(getFriends(friends.data));
+        dispatch(spinnerOff());
+    })
+    .catch(error => {
+        dispatch(throwError(error.message));
+    });
+}
+
+export const deleteFriendAsync = id => dispatch => {
+    dispatch(spinnerOn());
+    axios
+    .delete(`${friendsURL}/${id}`)
+    .then(friends => {
+        dispatch(getFriends(friends.data));
+        dispatch(spinnerOff());
+    })
+    .catch(error => {
+        dispatch(throwError(error.message));
+    });
+}
+
+export const updateFriendAsync = friend => dispatch => {
+    dispatch(spinnerOn());
+    axios
+    .put(`${friendsURL}/${friend.id}`, friend)
+    .then(friends => {
+        dispatch(getFriends(friends.data));
+        dispatch(spinnerOff());
+    })
+    .catch(error => {
+        dispatch(throwError(error.message));
+    });
+}
 
 export function addFriend(friend) {
   return {
@@ -18,7 +73,7 @@ export function getFriends(friends){
     }
 }
 
-export function deleteFriend(friend) {
+export function updateFriend(friend) {
 return {
     type: types.DELETE_FRIEND,
     payload: {
