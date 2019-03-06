@@ -1,6 +1,6 @@
 # Redux Friends
 
-Topics:
+Topics: 
 
 * `axios` package
 * AJAX
