@@ -6,26 +6,63 @@ import EditFriend from './Components/EditFriend';
 
 class App extends Component {
   state = {
-    friends: [{
-      id: 1,
-      name: 'Joe',
-      age: 24,
-      email: 'joe@lambdaschool.com',
+    friends: [
+      {
+        id: 1,
+        name: 'Joe',
+        age: 24,
+        email: 'joe@lambdaschool.com',
+      },
+      {
+        id: 2,
+        name: 'Steven',
+        age: 24,
+        email: 'stven@lambdaschool.com',
+      },
+    ],
+    addFriend: {
+      name: '',
+      age: '',
+      email: '',
     },
-    {
-      id: 2,
-      name: 'Steven',
-      age: 24,
-      email: 'stven@lambdaschool.com',
+    editFriend: {
+      name: '',
+      age: '',
+      email: '',
     },
-  ]
-  }
+    editMode: false,
+  };
+
+  addFriendHandler = event => {
+    this.setState({
+      addFriend: {
+        ...this.state.addFriend,
+        [event.target.name]: event.target.value,
+      },
+    });
+  };
+
+  editFriendHandler = event => {
+    this.setState({
+      editFriend: {
+        ...this.state.editFriend,
+        [event.target.name]: event.target.value,
+      },
+    });
+  };
+
   render() {
     return (
       <div className="App">
-       <Friends friends={this.state.friends} />
-       <AddFriend />
-       <EditFriend />
+        <Friends friends={this.state.friends} />
+        <AddFriend
+          addFriend={this.state.addFriend}
+          addFriendHandler={this.addFriendHandler}
+        />
+        <EditFriend
+          editFriend={this.state.editFriend}
+          editFriendHandler={this.editFriendHandler}
+        />
       </div>
     );
   }
