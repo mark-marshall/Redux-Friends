@@ -51,6 +51,16 @@ class App extends Component {
     });
   };
 
+  cancelEdit = () => {
+    this.setState({
+      editFriend: {
+        name: '',
+        age: '',
+        email: '',
+      }
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -62,6 +72,7 @@ class App extends Component {
         <EditFriend
           editFriend={this.state.editFriend}
           editFriendHandler={this.editFriendHandler}
+          cancelEdit={this.cancelEdit}
         />
       </div>
     );

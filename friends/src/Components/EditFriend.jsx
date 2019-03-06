@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EditFriend({ editFriend, editFriendHandler }) {
+export default function EditFriend({ editFriend, editFriendHandler, cancelEdit }) {
   return (
     <div>
       <input
@@ -24,10 +24,10 @@ export default function EditFriend({ editFriend, editFriendHandler }) {
          onChange={event => editFriendHandler(event)}
          value={editFriend.email}
       />
-      <button type="submit" /*</div>onClick={updateFriend}*/>
+      <button type="submit" /*</div>onClick={updateFriend} FIRE THE ACTION CREATOR FROM HERE & GIVE IT VALUES*/>
         Edit Friend
       </button>
-      <button type="submit" /*onClick={cancelEdit}*/ className="cancelButton">
+      <button type="submit" onClick={cancelEdit} className="cancelButton">
         X
       </button>
     </div>
