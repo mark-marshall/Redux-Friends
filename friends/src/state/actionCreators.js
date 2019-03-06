@@ -61,7 +61,7 @@ export function addFriend(friend) {
     payload: {
       name: friend.name,
       age: friend.age,
-      email: friend. email,
+      email: friend.email,
     },
   };
 }
