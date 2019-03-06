@@ -21,6 +21,7 @@ class App extends Component {
       email: '',
     },
     editFriend: {
+      id: '',
       name: '',
       age: '',
       email: '',
@@ -28,6 +29,10 @@ class App extends Component {
     editMode: false,
     currentFriendEditing: '',
   };
+
+ /* componentDidMount(){
+    this.props.getFriendsAsync();
+  } */
 
   addFriendHandler = event => {
     this.setState({
@@ -58,14 +63,15 @@ class App extends Component {
   };
 
   setFriendEditValue = friend => {
-   this.setState({
-     editFriend: {
-       name: friend.name,
-       age: friend.age,
-       email: friend.email,
-     }
-   })
-  }
+    this.setState({
+      editFriend: {
+        id: friend.id,
+        name: friend.name,
+        age: friend.age,
+        email: friend.email,
+      },
+    });
+  };
 
   render() {
     if (this.props.spinner) {
@@ -73,15 +79,21 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-          <Friends friends={this.props.friends} setFriendEditValue={this.setFriendEditValue} />
+          <Friends
+            friends={this.props.friends}
+            setFriendEditValue={this.setFriendEditValue}
+            deleteFriendAsync={this.props.deleteFriendAsync}
+          />
           <AddFriend
             addFriend={this.state.addFriend}
             addFriendHandler={this.addFriendHandler}
+            addFriendAsync={this.props.addFriendAsync}
           />
           <EditFriend
             editFriend={this.state.editFriend}
             editFriendHandler={this.editFriendHandler}
             cancelEdit={this.cancelEdit}
+            updateFriendAsync={this.props.updateFriendAsync}
           />
         </div>
       );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function AddFriend({ addFriend, addFriendHandler }) {
+export default function AddFriend({ addFriend, addFriendHandler, addFriendAsync }) {
   return (
     <div>
        <input
@@ -24,7 +24,7 @@ export default function AddFriend({ addFriend, addFriendHandler }) {
            onChange={event => addFriendHandler(event)}
            value={addFriend.email}
         />
-        <button className="addButton" /*onClick={postFriend}  */ type="submit">
+        <button className="addButton" onClick={() => addFriendAsync(addFriend)}  type="submit">
           Add Friend
         </button>
     </div>

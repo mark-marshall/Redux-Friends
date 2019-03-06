@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Friends({ friends, setFriendEditValue }) {
+export default function Friends({ friends, setFriendEditValue, deleteFriendAsync }) {
   return friends.map(friend => (
     <div key={friend.id}>
       <h1>{friend.name}</h1>
@@ -16,7 +16,7 @@ export default function Friends({ friends, setFriendEditValue }) {
       </button>
       <button
         className="deleteButton"
-       // onClick={event => deleteFriend(event)}
+        onClick={() => deleteFriendAsync(friend.id)}
         value={friend.id}
         type="submit"
       >
