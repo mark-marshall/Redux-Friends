@@ -1,11 +1,6 @@
 import * as types from './actionTypes';
 
-export function friends(friendsArray = [{
-    id: 1,
-    name: 'Joe',
-    age: 24,
-    email: 'joe@lambdaschool.com',
-  }], action) {
+export function friends(friendsArray = [], action) {
   switch (action.type) {
     case types.GET_FRIENDS:
       return action.payload;

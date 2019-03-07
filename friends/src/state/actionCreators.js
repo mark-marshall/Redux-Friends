@@ -69,13 +69,6 @@ export const updateFriendAsync = friend => dispatch => {
     });
 }
 
-// Do we even need this action?
-export function getToken(){
-    return {
-        type: types.GET_TOKEN,
-    }
-}
-
 export function addFriend(friend) {
   return {
     type: types.ADD_FRIEND,
