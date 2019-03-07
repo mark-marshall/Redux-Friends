@@ -6,6 +6,7 @@ import './App.css';
 import Friends from './Components/Friends';
 import AddFriend from './Components/AddFriend';
 import EditFriend from './Components/EditFriend';
+import LoginPage from './Components/LoginPage';
 import {
   getFriendsAsync,
   addFriendAsync,
@@ -78,7 +79,8 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-          <Friends
+          <LoginPage />
+           <Friends
             friends={this.props.friends}
             setFriendEditValue={this.setFriendEditValue}
             deleteFriendAsync={this.props.deleteFriendAsync}
