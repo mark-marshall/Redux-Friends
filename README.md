@@ -1,6 +1,6 @@
 # Redux Friends
 
-Topics:
+Topics: 
 
 * `axios` package
 * AJAX
@@ -34,7 +34,7 @@ Topics:
 * You will need to use `redux-thunk` as a middleware inside of `src/index.js`. You'll want to be sure to pass it to `applyMiddleware()` then feed it into your createStore function.
 * If you so choose, include `redux-logger` to your middleware. You're going to have plenty of action creators that will consume our API so you'll get plenty of actions triggered.
 
-## Root Reducer and our State Tree
+## Root Reducer and our State Tree 
 
 * Your initial state **could** (but doesn't have to) look something like this:
 
