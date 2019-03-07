@@ -44,6 +44,21 @@ class App extends Component {
     });
   };
 
+  resetAdd = () => {
+    this.setState({
+      addFriend: {
+        name: '',
+        age: '',
+        email: '',
+      }
+    })
+  }
+
+  fireFriendAdd = addFriend => {
+    this.props.addFriendAsync(addFriend);
+    this.resetAdd();
+  }
+
   editFriendHandler = event => {
     this.setState({
       editFriend: {
@@ -53,7 +68,7 @@ class App extends Component {
     });
   };
 
-  cancelEdit = () => {
+  resetEdit = () => {
     this.setState({
       editFriend: {
         name: '',
@@ -74,6 +89,11 @@ class App extends Component {
     });
   };
 
+  fireFriendEdit = editFriend => {
+    this.props.updateFriendAsync(editFriend);
+    this.resetEdit();
+  }
+
   render() {
     if (this.props.spinner) {
       return <div>Loading...</div>;
@@ -89,13 +109,14 @@ class App extends Component {
           <AddFriend
             addFriend={this.state.addFriend}
             addFriendHandler={this.addFriendHandler}
-            addFriendAsync={this.props.addFriendAsync}
+            fireFriendAdd={this.fireFriendAdd}
+            resetAdd={this.resetAdd}
           />
           <EditFriend
             editFriend={this.state.editFriend}
             editFriendHandler={this.editFriendHandler}
-            cancelEdit={this.cancelEdit}
-            updateFriendAsync={this.props.updateFriendAsync}
+            resetEdit={this.resetEdit}
+            fireFriendEdit={this.fireFriendEdit}
           />
         </div>
       );
