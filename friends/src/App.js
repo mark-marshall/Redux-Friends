@@ -26,7 +26,6 @@ class App extends Component {
       age: '',
       email: '',
     },
-    editMode: false,
     currentFriendEditing: '',
   };
 
