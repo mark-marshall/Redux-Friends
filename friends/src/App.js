@@ -116,8 +116,9 @@ class App extends Component {
             <Link to="/">Friends</Link>
           </nav>
           <Route path="/login" render={() =>  <LoginPage getToken={this.props.getTokenAsync} />}/>
-          <Route exact path="/" render = {() =>  
-          <div>
+          <Route exact path="/" render = {() =>  (
+            localStorage.getItem('token') ?
+          (<div>
           <Friends
             friends={this.props.friends}
             setFriendEditValue={this.setFriendEditValue}
@@ -136,7 +137,11 @@ class App extends Component {
             resetEdit={this.resetEdit}
             fireFriendEdit={this.fireFriendEdit}
           />
-          </div>
+          </div>)
+          : (
+            <Redirect to="/login" />
+          )
+          )
           }/>
         </div>
         </Router>
