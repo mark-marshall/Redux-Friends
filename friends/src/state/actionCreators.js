@@ -20,7 +20,7 @@ export const getTokenAsync = () => dispatch => {
 export const getFriendsAsync = () => dispatch => {
     dispatch(spinnerOn());
     axios()
-    .get()
+    .get(friendsURL)
     .then(friends => {
         dispatch(getFriends(friends.data));
         dispatch(spinnerOff());

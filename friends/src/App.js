@@ -31,9 +31,9 @@ class App extends Component {
     currentFriendEditing: '',
   };
 
- /* componentDidMount(){
+  componentDidMount(){
     this.props.getFriendsAsync();
-  } */
+  } 
 
   addFriendHandler = event => {
     this.setState({
