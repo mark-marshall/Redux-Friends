@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 
 import './App.css';
 import Friends from './Components/Friends';
@@ -33,9 +39,9 @@ class App extends Component {
     currentFriendEditing: '',
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.getFriendsAsync();
-  } 
+  }
 
   addFriendHandler = event => {
     this.setState({
@@ -52,14 +58,14 @@ class App extends Component {
         name: '',
         age: '',
         email: '',
-      }
-    })
-  }
+      },
+    });
+  };
 
   fireFriendAdd = addFriend => {
     this.props.addFriendAsync(addFriend);
     this.resetAdd();
-  }
+  };
 
   editFriendHandler = event => {
     this.setState({
@@ -96,16 +102,23 @@ class App extends Component {
     this.props.updateFriendAsync(editFriend);
     this.resetEdit();
     this.props.editModeOff();
-  }
+  };
 
   render() {
     if (this.props.spinner) {
       return <div>Loading...</div>;
     } else {
       return (
+        <Router>
         <div className="App">
-          <LoginPage getToken={this.props.getTokenAsync}/>
-           <Friends
+          <nav>
+            <Link to="/login">Login</Link>
+            <Link to="/">Friends</Link>
+          </nav>
+          <Route path="/login" render={() =>  <LoginPage getToken={this.props.getTokenAsync} />}/>
+          <Route exact path="/" render = {() =>  
+          <div>
+          <Friends
             friends={this.props.friends}
             setFriendEditValue={this.setFriendEditValue}
             deleteFriendAsync={this.props.deleteFriendAsync}
@@ -123,7 +136,10 @@ class App extends Component {
             resetEdit={this.resetEdit}
             fireFriendEdit={this.fireFriendEdit}
           />
+          </div>
+          }/>
         </div>
+        </Router>
       );
     }
   }
