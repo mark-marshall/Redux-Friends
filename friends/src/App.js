@@ -12,6 +12,7 @@ import {
   addFriendAsync,
   deleteFriendAsync,
   updateFriendAsync,
+  getTokenAsync,
 } from './state/actionCreators';
 
 class App extends Component {
@@ -79,7 +80,7 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-          <LoginPage />
+          <LoginPage getToken={this.props.getTokenAsync}/>
            <Friends
             friends={this.props.friends}
             setFriendEditValue={this.setFriendEditValue}
@@ -117,6 +118,7 @@ function mapDispatchToProps(dispatch) {
       addFriendAsync,
       deleteFriendAsync,
       updateFriendAsync,
+      getTokenAsync,
     },
     dispatch,
   );

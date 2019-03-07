@@ -1,12 +1,27 @@
 import * as types from './actionTypes';
 import axios from 'axios';
 
+const tokenURL = 'http://localhost:5000/api/login';
 const friendsURL = 'http://localhost:5000/api/friends';
+
+export const getTokenAsync = () => dispatch => {
+    dispatch(spinnerOn());
+    axios
+    .post(tokenURL, { username: 'Lambda School', password: 'i<3Lambd4' })
+    .then(token => {
+        console.log(token);
+        localStorage.setItem('token', token.data.payload)
+        dispatch(spinnerOff());
+    })
+    .catch(error => {
+        dispatch(throwError(error.message));
+    });
+}
 
 export const getFriendsAsync = () => dispatch => {
     dispatch(spinnerOn());
     axios
-    .get(friendsURL)
+    .get()
     .then(friends => {
         dispatch(getFriends(friends.data));
         dispatch(spinnerOff());
@@ -53,6 +68,13 @@ export const updateFriendAsync = friend => dispatch => {
     .catch(error => {
         dispatch(throwError(error.message));
     });
+}
+
+// Do we even need this action?
+export function getToken(){
+    return {
+        type: types.GET_TOKEN,
+    }
 }
 
 export function addFriend(friend) {
