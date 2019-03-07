@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Friends({ friends, setFriendEditValue, deleteFriendAsync }) {
+export default function Friends({ friends, setFriendEditValue, deleteFriendAsync  }) {
   return friends.map(friend => (
     <div key={friend.id}>
       <h1>{friend.name}</h1>

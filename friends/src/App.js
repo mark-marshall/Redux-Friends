@@ -13,6 +13,8 @@ import {
   deleteFriendAsync,
   updateFriendAsync,
   getTokenAsync,
+  editModeOn,
+  editModeOff,
 } from './state/actionCreators';
 
 class App extends Component {
@@ -87,11 +89,13 @@ class App extends Component {
         email: friend.email,
       },
     });
+    this.props.editModeOn();
   };
 
   fireFriendEdit = editFriend => {
     this.props.updateFriendAsync(editFriend);
     this.resetEdit();
+    this.props.editModeOff();
   }
 
   render() {
@@ -105,6 +109,7 @@ class App extends Component {
             friends={this.props.friends}
             setFriendEditValue={this.setFriendEditValue}
             deleteFriendAsync={this.props.deleteFriendAsync}
+            editMode={this.props.editMode}
           />
           <AddFriend
             addFriend={this.state.addFriend}
@@ -140,6 +145,8 @@ function mapDispatchToProps(dispatch) {
       deleteFriendAsync,
       updateFriendAsync,
       getTokenAsync,
+      editModeOn,
+      editModeOff,
     },
     dispatch,
   );

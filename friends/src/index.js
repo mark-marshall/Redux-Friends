@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { friends, spinner, error } from './state/reducers';
+import { friends, spinner, error, editMode } from './state/reducers';
 
 import App from './App';
 
@@ -11,6 +11,7 @@ const rootReducer = combineReducers({
   friends,
   spinner,
   error,
+  editMode,
 });
 
 const store = createStore(

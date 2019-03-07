@@ -40,3 +40,14 @@ export function error(error = null, action) {
       return error;
   }
 }
+
+export function editMode(editMode = false, action) {
+  switch (action.type) {
+    case types.EDIT_MODE_ON:
+      return true;
+    case types.EDIT_MODE_OFF:
+      return false;
+    default:
+      return editMode;
+  }
+}

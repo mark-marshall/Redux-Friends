@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EditFriend({ editFriend, editFriendHandler, resetEdit, fireFriendEdit }) {
+export default function EditFriend({ editFriend, editFriendHandler, resetEdit, fireFriendEdit  }) {
   return (
     <div>
       <input

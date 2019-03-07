@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function AddFriend({ addFriend, addFriendHandler, fireFriendAdd }) {
-
   return (
     <div>
        <input
