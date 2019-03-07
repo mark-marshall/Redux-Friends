@@ -54,6 +54,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  st => st,
+  null,
   mapDispatchToProps,
 )(App);

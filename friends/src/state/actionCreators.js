@@ -7,6 +7,7 @@ const friendsURL = 'http://localhost:5000/api/friends';
 export const getTokenAsync = () => dispatch => {
   dispatch(spinnerOn());
   axios()
+  // switch up this object to the login values
     .post(tokenURL, { username: 'Lambda School', password: 'i<3Lambd4' })
     .then(token => {
       localStorage.setItem('token', token.data.payload);

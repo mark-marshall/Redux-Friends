@@ -110,12 +110,14 @@ class Protected extends Component {
             editMode={this.props.editMode}
           />
           <AddFriend
+            className="aFriend"
             addFriend={this.state.addFriend}
             addFriendHandler={this.addFriendHandler}
             fireFriendAdd={this.fireFriendAdd}
             resetAdd={this.resetAdd}
           />
           <EditFriend
+            className="eFriend"
             editFriend={this.state.editFriend}
             editFriendHandler={this.editFriendHandler}
             resetEdit={this.resetEdit}
@@ -132,6 +134,7 @@ function mapStateToProps(state) {
     friends: state.friends,
     spinner: state.spinner,
     error: state.error,
+    editMode: state.editMode,
   };
 }
 
