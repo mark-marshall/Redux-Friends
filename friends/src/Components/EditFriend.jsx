@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EditFriend({ editFriend, editFriendHandler, cancelEdit, updateFriendAsync }) {
+export default function EditFriend({ editFriend, editFriendHandler, resetEdit, fireFriendEdit  }) {
   return (
     <div>
       <input
@@ -24,10 +24,10 @@ export default function EditFriend({ editFriend, editFriendHandler, cancelEdit, 
          onChange={event => editFriendHandler(event)}
          value={editFriend.email}
       />
-      <button type="submit" onClick={() => updateFriendAsync(editFriend)}>
+      <button type="submit" onClick={() => fireFriendEdit(editFriend)}>
         Edit Friend
       </button>
-      <button type="submit" onClick={cancelEdit} className="cancelButton">
+      <button type="submit" onClick={resetEdit} className="cancelButton">
         X
       </button>
     </div>

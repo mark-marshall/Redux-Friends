@@ -1,127 +1,59 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+} from 'react-router-dom';
 
 import './App.css';
-import Friends from './Components/Friends';
-import AddFriend from './Components/AddFriend';
-import EditFriend from './Components/EditFriend';
-import {
-  getFriendsAsync,
-  addFriendAsync,
-  deleteFriendAsync,
-  updateFriendAsync,
-} from './state/actionCreators';
+import Protected from './Protected';
+import LoginPage from './Components/LoginPage';
+import { getTokenAsync } from './state/actionCreators';
 
 class App extends Component {
-  state = {
-    addFriend: {
-      name: '',
-      age: '',
-      email: '',
-    },
-    editFriend: {
-      id: '',
-      name: '',
-      age: '',
-      email: '',
-    },
-    editMode: false,
-    currentFriendEditing: '',
-  };
-
- /* componentDidMount(){
-    this.props.getFriendsAsync();
-  } */
-
-  addFriendHandler = event => {
-    this.setState({
-      addFriend: {
-        ...this.state.addFriend,
-        [event.target.name]: event.target.value,
-      },
-    });
-  };
-
-  editFriendHandler = event => {
-    this.setState({
-      editFriend: {
-        ...this.state.editFriend,
-        [event.target.name]: event.target.value,
-      },
-    });
-  };
-
-  cancelEdit = () => {
-    this.setState({
-      editFriend: {
-        name: '',
-        age: '',
-        email: '',
-      },
-    });
-  };
-
-  setFriendEditValue = friend => {
-    this.setState({
-      editFriend: {
-        id: friend.id,
-        name: friend.name,
-        age: friend.age,
-        email: friend.email,
-      },
-    });
-  };
-
   render() {
-    if (this.props.spinner) {
-      return <div>Loading...</div>;
-    } else {
-      return (
-        <div className="App">
-          <Friends
-            friends={this.props.friends}
-            setFriendEditValue={this.setFriendEditValue}
-            deleteFriendAsync={this.props.deleteFriendAsync}
+    return (
+      <Router>
+        <div>
+          <nav>
+            <Link to="/friends">Friends</Link>
+            <Link to="/">Login</Link>
+          </nav>
+
+          <Route
+            exact path="/"
+            render={() => <LoginPage getToken={this.props.getTokenAsync} />}
           />
-          <AddFriend
-            addFriend={this.state.addFriend}
-            addFriendHandler={this.addFriendHandler}
-            addFriendAsync={this.props.addFriendAsync}
-          />
-          <EditFriend
-            editFriend={this.state.editFriend}
-            editFriendHandler={this.editFriendHandler}
-            cancelEdit={this.cancelEdit}
-            updateFriendAsync={this.props.updateFriendAsync}
+
+          <Route
+            path="/friends"
+            render={() =>
+              localStorage.getItem('token') ? (
+                <Protected />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
           />
         </div>
-      );
-    }
+      </Router>
+    );
   }
-}
-
-function mapStateToProps(state) {
-  return {
-    friends: state.friends,
-    spinner: state.spinner,
-    error: state.error,
-  };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      getFriendsAsync,
-      addFriendAsync,
-      deleteFriendAsync,
-      updateFriendAsync,
+      getTokenAsync,
     },
     dispatch,
   );
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(App);

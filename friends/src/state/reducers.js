@@ -1,11 +1,6 @@
 import * as types from './actionTypes';
 
-export function friends(friendsArray = [{
-    id: 1,
-    name: 'Joe',
-    age: 24,
-    email: 'joe@lambdaschool.com',
-  }], action) {
+export function friends(friendsArray = [], action) {
   switch (action.type) {
     case types.GET_FRIENDS:
       return action.payload;
@@ -43,5 +38,16 @@ export function error(error = null, action) {
       return action.payload;
     default:
       return error;
+  }
+}
+
+export function editMode(editMode = false, action) {
+  switch (action.type) {
+    case types.EDIT_MODE_ON:
+      return true;
+    case types.EDIT_MODE_OFF:
+      return false;
+    default:
+      return editMode;
   }
 }
