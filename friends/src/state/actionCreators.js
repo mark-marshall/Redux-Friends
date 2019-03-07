@@ -1,15 +1,14 @@
 import * as types from './actionTypes';
-import axios from 'axios';
+import axios from '../axios/axios';
 
 const tokenURL = 'http://localhost:5000/api/login';
 const friendsURL = 'http://localhost:5000/api/friends';
 
 export const getTokenAsync = () => dispatch => {
     dispatch(spinnerOn());
-    axios
+    axios()
     .post(tokenURL, { username: 'Lambda School', password: 'i<3Lambd4' })
     .then(token => {
-        console.log(token);
         localStorage.setItem('token', token.data.payload)
         dispatch(spinnerOff());
     })
@@ -20,7 +19,7 @@ export const getTokenAsync = () => dispatch => {
 
 export const getFriendsAsync = () => dispatch => {
     dispatch(spinnerOn());
-    axios
+    axios()
     .get()
     .then(friends => {
         dispatch(getFriends(friends.data));
@@ -33,7 +32,7 @@ export const getFriendsAsync = () => dispatch => {
 
 export const addFriendAsync = friend => dispatch => {
     dispatch(spinnerOn());
-    axios
+    axios()
     .post(friendsURL, friend)
     .then(friends => {
         dispatch(getFriends(friends.data));
@@ -46,7 +45,7 @@ export const addFriendAsync = friend => dispatch => {
 
 export const deleteFriendAsync = id => dispatch => {
     dispatch(spinnerOn());
-    axios
+    axios()
     .delete(`${friendsURL}/${id}`)
     .then(friends => {
         dispatch(getFriends(friends.data));
@@ -59,7 +58,7 @@ export const deleteFriendAsync = id => dispatch => {
 
 export const updateFriendAsync = friend => dispatch => {
     dispatch(spinnerOn());
-    axios
+    axios()
     .put(`${friendsURL}/${friend.id}`, friend)
     .then(friends => {
         dispatch(getFriends(friends.data));
